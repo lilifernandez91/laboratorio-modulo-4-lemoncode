@@ -1,10 +1,10 @@
 const handleTurno = (ev: Event) => {
-    const turno = document.getElementById('turno')
+    ev.preventDefault()
+    const turno = document.getElementById('turno') as HTMLElement
     const obtenerId = (ev.currentTarget as HTMLElement).id
     let valor
-    if (turno !== null) {
+    if (turno) {
         if (obtenerId === 'siguiente') {
-            ev.preventDefault()
             valor = Number(turno.innerHTML) + 1
         } else {
             valor = Number(turno.innerHTML) - 1
@@ -13,18 +13,20 @@ const handleTurno = (ev: Event) => {
     }
 }
 
-const handleCambiarTurno = () => {
-    const turno = document.getElementById('turno')
+const handleCambiarTurno = (ev: Event) => {
+    ev.preventDefault()
+    const turno = document.getElementById('turno') as HTMLElement
     const cambiarTurno = (document.getElementById('cambiar-turno') as HTMLInputElement).value
-    if (turno !== null) {
+    if (turno && cambiarTurno) {
         turno.innerHTML = cambiarTurno.toString().padStart(2, '0')
     }
 }
 
-const handleReiniciar = () => {
-    const turno = document.getElementById('turno')
-    const cambiarTurno = (document.getElementById('cambiar-turno') as HTMLInputElement)
-    if (turno !== null && cambiarTurno !== null) {
+const handleReiniciar = (ev: Event) => {
+    ev.preventDefault()
+    const turno = document.getElementById('turno') as HTMLElement
+    const cambiarTurno = document.getElementById('cambiar-turno') as HTMLInputElement
+    if (turno && cambiarTurno) {
         turno.innerHTML = '01'
         cambiarTurno.value = ''
     }
@@ -33,18 +35,21 @@ const handleReiniciar = () => {
 const buttonAnterior = document.getElementById('anterior')
 const buttonSiguiente = document.getElementById('siguiente')
 
-if (buttonAnterior !== null && buttonSiguiente !== null) {
+if (buttonAnterior && buttonSiguiente) {
     buttonAnterior.addEventListener('click', handleTurno)
     buttonSiguiente.addEventListener('click', handleTurno)
 }
 
 const buttonCambiar = document.getElementById('cambiar')
 
-if (buttonCambiar !== null) {
+if (buttonCambiar) {
     buttonCambiar.addEventListener('click', handleCambiarTurno)
 }
 
 const buttonReiniciar = document.getElementById('reiniciar')
 
-buttonReiniciar?.addEventListener('click', handleReiniciar)
+if (buttonReiniciar) {
+    buttonReiniciar.addEventListener('click', handleReiniciar)
+}
+
 
