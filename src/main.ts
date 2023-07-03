@@ -1,11 +1,15 @@
 const turno = document.getElementById('turno')
-const cambiarTurno = (document.getElementById('cambiar-turno') as HTMLInputElement)
+const cambiarTurno = document.getElementById('cambiar-turno')
 
 const handleTurno = (ev: Event) => {
     ev.preventDefault()
     let obtenerId
-    if (ev.currentTarget instanceof HTMLElement) {
+    if (ev.currentTarget instanceof HTMLButtonElement) {
         obtenerId = ev.currentTarget.id
+    }
+    else {
+        console.error('Ha ocurrido un error')
+        return;
     }
     let valor
     if (turno) {
@@ -20,16 +24,22 @@ const handleTurno = (ev: Event) => {
 
 const handleCambiarTurno = (ev: Event) => {
     ev.preventDefault()
-    if (turno && cambiarTurno) {
+    if (turno && cambiarTurno && cambiarTurno instanceof HTMLInputElement) {
         turno.innerHTML = cambiarTurno.value.toString().padStart(2, '0')
+    } else {
+        console.error('Ha ocurrido un error al intentar cambiar el turno')
+        return;
     }
 }
 
 const handleReiniciar = (ev: Event) => {
     ev.preventDefault()
-    if (turno && cambiarTurno) {
+    if (turno && cambiarTurno && cambiarTurno instanceof HTMLInputElement) {
         turno.innerHTML = '01'
         cambiarTurno.value = ''
+    } else {
+        console.error('Ha ocurrido un error al intentar reiniciar los valores')
+        return;
     }
 }
 
